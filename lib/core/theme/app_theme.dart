@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/api_colors.dart';
+import '../constants/app_colors.dart';
 
 class AppTheme {
   static ThemeData get light {
@@ -10,18 +10,19 @@ class AppTheme {
         primary: AppColors.primary,
         surface: AppColors.surface,
         error: AppColors.error,
+        brightness: Brightness.light,
       ),
       scaffoldBackgroundColor: AppColors.background,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.black87, // Better contrast for Lime
         elevation: 0,
         centerTitle: false,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: Colors.black87, // Better contrast for Lime
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 2,
         ),
