@@ -97,6 +97,58 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> loginWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    _setLoading();
+    try {
+      final credential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      _firebaseUser = credential.user;
+
+      if (!(_firebaseUser?.emailVerified ?? false)) {
+        _status = AuthStatus.emailNotVerified;
+        notifyListeners();
+        return false;
+      }
+
+      return await _verifyTokenToBackend();
+    } on FirebaseAuthException catch (e) {
+      _setError(_mapFirebaseError(e.code));
+      return false;
+    }
+  }
+
+  void _setError(String message) {
+    _errorMessage = message;
+    _status = AuthStatus.error;
+    notifyListeners();
+  }
+
+  String _mapFirebaseError(String code) {
+    switch (code) {
+      case 'user-not-found':
+        return 'Akun tidak ditemukan.';
+      case 'wrong-password':
+        return 'Password salah.';
+      case 'invalid-credential':
+        return 'Email atau password tidak valid.';
+      case 'user-disabled':
+        return 'Akun telah dinonaktifkan.';
+      case 'too-many-requests':
+        return 'Terlalu banyak percobaan. Coba lagi nanti.';
+      case 'email-already-in-use':
+        return 'Email sudah terdaftar.';
+      case 'weak-password':
+        return 'Password terlalu lemah.';
+      default:
+        return 'Terjadi kesalahan. Silakan coba lagi.';
+    }
+  }
+
   Future<bool> _verifyTokenToBackend() async {
     final firebaseToken = await _firebaseUser?.getIdToken();
 
