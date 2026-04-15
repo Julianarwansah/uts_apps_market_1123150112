@@ -122,6 +122,30 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> loginWithGoogle() async {
+    _setLoading();
+    try {
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        _setError('Login Google dibatalkan');
+        return false;
+      }
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken:     googleAuth.idToken,
+      );
+      final userCred = await _auth.signInWithCredential(credential);
+      _firebaseUser  = userCred.user;
+
+      return await _verifyTokenToBackend();
+    } catch (e) {
+      _setError('Gagal login dengan Google: $e');
+      return false;
+    }
+  }
+
   void _setError(String message) {
     _errorMessage = message;
     _status = AuthStatus.error;
