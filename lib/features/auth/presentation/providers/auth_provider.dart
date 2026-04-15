@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:uts_apps_market_1123150112/core/constants/api_constants.dart';
+import 'package:uts_apps_market_1123150112/core/services/dio_client.dart';
+import 'package:uts_apps_market_1123150112/core/services/secure_storage_service.dart';
 
 enum AuthStatus {
   initial,
@@ -95,7 +98,21 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<bool> _verifyTokenToBackend() async {
-    // TODO: implementasi di langkah berikutnya
-    return false;
+    final firebaseToken = await _firebaseUser?.getIdToken();
+
+    final response = await DioClient.instance.post(
+      ApiConstants.verifyToken,
+      data: {'firebase_token': firebaseToken},
+    );
+
+    final data = response.data['data'] as Map<String, dynamic>;
+    final backendToken = data['access_token'] as String;
+
+    await SecureStorageService.saveToken(backendToken);
+
+    _backendToken = backendToken;
+    _status = AuthStatus.authenticated;
+    notifyListeners();
+    return true;
   }
 }
