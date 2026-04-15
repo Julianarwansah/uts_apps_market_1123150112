@@ -63,4 +63,39 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> loginAfterEmailVerification() async {
+    try {
+      _setLoading();
+
+      await _firebaseUser?.reload();
+      _firebaseUser = _auth.currentUser;
+
+      if (!(_firebaseUser?.emailVerified ?? false)) {
+        _status = AuthStatus.emailNotVerified;
+        notifyListeners();
+        return false;
+      }
+
+      final credential = await _auth.signInWithEmailAndPassword(
+        email: _tempEmail!,
+        password: _tempPassword!,
+      );
+      _firebaseUser = credential.user;
+      _tempEmail = null;
+      _tempPassword = null;
+
+      return await _verifyTokenToBackend();
+    } on FirebaseAuthException catch (e) {
+      _errorMessage = e.message;
+      _status = AuthStatus.error;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> _verifyTokenToBackend() async {
+    // TODO: implementasi di langkah berikutnya
+    return false;
+  }
 }
