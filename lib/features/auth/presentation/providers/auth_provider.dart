@@ -36,38 +36,28 @@ class AuthProvider extends ChangeNotifier {
   bool       get isLoading    => _status == AuthStatus.loading;
 
 
-  // ─── Helper Internal ─────────────────────────────────────
+  // ─── Private Helpers ──────────────────────────────────────
   void _setLoading() {
     _status = AuthStatus.loading;
+    _errorMessage = null;
     notifyListeners();
   }
 
   void _setError(String message) {
-    _errorMessage = message;
     _status = AuthStatus.error;
+    _errorMessage = message;
     notifyListeners();
   }
 
-  String _mapFirebaseError(String code) {
-    switch (code) {
-      case 'user-not-found':
-        return 'Akun tidak ditemukan.';
-      case 'wrong-password':
-        return 'Password salah.';
-      case 'invalid-credential':
-        return 'Email atau password tidak valid.';
-      case 'user-disabled':
-        return 'Akun telah dinonaktifkan.';
-      case 'too-many-requests':
-        return 'Terlalu banyak percobaan. Coba lagi nanti.';
-      case 'email-already-in-use':
-        return 'Email sudah terdaftar.';
-      case 'weak-password':
-        return 'Password terlalu lemah.';
-      default:
-        return 'Terjadi kesalahan. Silakan coba lagi.';
-    }
-  }
+  String _mapFirebaseError(String code) => switch (code) {
+    'email-already-in-use'   => 'Email sudah terdaftar. Gunakan email lain.',
+    'user-not-found'         => 'Akun tidak ditemukan. Silakan daftar.',
+    'wrong-password'         => 'Password salah. Coba lagi.',
+    'invalid-email'          => 'Format email tidak valid.',
+    'weak-password'          => 'Password terlalu lemah. Minimal 6 karakter.',
+    'network-request-failed' => 'Tidak ada koneksi internet.',
+    _                        => 'Terjadi kesalahan. Coba lagi.',
+  };
 
 
   // ─── Register dengan Email & Password ────────────────────
