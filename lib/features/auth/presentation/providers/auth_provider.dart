@@ -225,16 +225,20 @@ class AuthProvider extends ChangeNotifier {
 
   // ─── Verifikasi Token ke Backend ──────────────────────────
   Future<bool> _verifyTokenToBackend() async {
+    // Ambil Firebase ID Token (expired tiap 1 jam)
     final firebaseToken = await _firebaseUser?.getIdToken();
 
+    // POST ke backend — DioClient interceptor sudah handle logging
     final response = await DioClient.instance.post(
       ApiConstants.verifyToken,
       data: {'firebase_token': firebaseToken},
     );
 
+    // Backend return JWT milik sistem kita
     final data         = response.data['data'] as Map<String, dynamic>;
     final backendToken = data['access_token'] as String;
 
+    // Simpan aman di device (encrypted)
     await SecureStorageService.saveToken(backendToken);
 
     _backendToken = backendToken;
