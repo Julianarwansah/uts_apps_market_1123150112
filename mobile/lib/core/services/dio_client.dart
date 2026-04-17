@@ -30,7 +30,7 @@ class DioClient {
         handler.next(response);
       },
       onError: (error, handler) async {
-        debugPrint('[ERROR] ${error.response?.statusCode}');
+        debugPrint('[ERROR] ${error.type}: ${error.message}');
         if (error.response?.statusCode == 401) {
           await SecureStorageService.clearAll(); // Auto logout
         }
