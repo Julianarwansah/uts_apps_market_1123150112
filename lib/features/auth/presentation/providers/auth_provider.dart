@@ -218,9 +218,9 @@ class AuthProvider extends ChangeNotifier {
 
   // ─── Logout ───────────────────────────────────────────────
   Future<void> logout() async {
-    await _auth.signOut();
-    await _googleSignIn.signOut();
-    await SecureStorageService.clearAll();
+    await _auth.signOut();                  // Logout dari Firebase
+    await _googleSignIn.signOut();          // Logout dari Google (jika pakai Google)
+    await SecureStorageService.clearAll();  // Hapus JWT dari storage
     _firebaseUser = null;
     _backendToken = null;
     _status = AuthStatus.unauthenticated;
