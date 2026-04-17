@@ -108,13 +108,15 @@ class AuthProvider extends ChangeNotifier {
   }
 
 
-  // ─── Verifikasi Email ─────────────────────────────────────
+  // ─── Kirim ulang email verifikasi ────────────────────────
   Future<void> resendVerificationEmail() async {
     await _firebaseUser?.sendEmailVerification();
   }
 
+
+  // ─── Cek status verifikasi email (polling) ────────────────
   Future<bool> checkEmailVerified() async {
-    await _firebaseUser?.reload();
+    await _firebaseUser?.reload(); // Refresh data user dari Firebase
     _firebaseUser = _auth.currentUser;
 
     if (_firebaseUser?.emailVerified ?? false) {
