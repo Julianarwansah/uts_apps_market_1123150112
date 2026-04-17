@@ -15,14 +15,14 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.background,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.black87, // Better contrast for Lime
+        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: false,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: Colors.black87, // Better contrast for Lime
+          foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 2,
         ),

@@ -14,7 +14,6 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    // Fetch produk saat halaman pertama dibuka
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductProvider>().fetchProducts();
     });
@@ -27,11 +26,9 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Produk')),
       body: switch (product.status) {
-        // Tampilkan spinner saat loading
         ProductStatus.loading || ProductStatus.initial =>
           const Center(child: CircularProgressIndicator()),
 
-        // Tampilkan pesan error + tombol retry
         ProductStatus.error => Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +43,6 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ),
 
-        // Tampilkan grid produk
         ProductStatus.loaded => GridView.builder(
           padding: const EdgeInsets.all(16),
           itemCount: product.products.length,
@@ -77,7 +73,6 @@ class _ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Gambar produk
           Expanded(
             child: Image.network(
               product.imageUrl,
@@ -89,8 +84,6 @@ class _ProductCard extends StatelessWidget {
               ),
             ),
           ),
-
-          // Info produk
           Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -106,7 +99,7 @@ class _ProductCard extends StatelessWidget {
                 Text(
                   'Rp ${product.price.toStringAsFixed(0)}',
                   style: const TextStyle(
-                    color: Color(0xFF1565C0),
+                    color: Color(0xFFFF9800),
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
                   ),

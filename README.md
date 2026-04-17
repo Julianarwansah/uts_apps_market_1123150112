@@ -1,5 +1,3 @@
-sampai sini 5.10 Dan fungsi lainnya
-
 # uts_apps_market_1123150112
 
 A new Flutter project.

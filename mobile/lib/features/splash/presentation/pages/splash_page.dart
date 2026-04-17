@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:uts_apps_market_1123150112/core/router/app_router.dart';
 import 'package:uts_apps_market_1123150112/core/services/secure_storage_service.dart';
 
-// SplashPage: cek token tersimpan, redirect otomatis
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -18,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _checkAuth() async {
-    await Future.delayed(const Duration(seconds: 2)); // Animasi splash
+    await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
 
     final token = await SecureStorageService.getToken();

@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  /// Handler untuk login email/password
   Future<void> _loginEmail() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -45,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
     _handleLoginResult(ok, auth);
   }
 
-  /// Handler untuk login Google
   Future<void> _loginGoogle() async {
     final auth = context.read<AuthProvider>();
     final ok   = await auth.loginWithGoogle();
@@ -53,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
     _handleLoginResult(ok, auth);
   }
 
-  /// Routing berdasarkan hasil login
   void _handleLoginResult(bool ok, AuthProvider auth) {
     if (ok) {
       Navigator.pushReplacementNamed(context, AppRouter.dashboard);
@@ -182,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text(
                           'Daftar',
                           style: TextStyle(
-                            color: Color(0xFF1565C0),
+                            color: Color(0xFFFF9800),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -42,7 +42,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (!mounted) return;
     if (success) {
-      // Navigasi ke halaman instruksi verifikasi email
       Navigator.pushReplacementNamed(context, AppRouter.verifyEmail);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -70,16 +69,12 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 32),
-
-                  // Widget reusable: AuthHeader
                   const AuthHeader(
                     icon: Icons.person_add_alt_1,
                     title: 'Buat Akun Baru',
                     subtitle: 'Lengkapi data diri Anda untuk mendaftar',
                   ),
                   const SizedBox(height: 32),
-
-                  // Widget reusable: CustomTextField
                   CustomTextField(
                     label: 'Nama Lengkap',
                     hint: 'Masukkan nama lengkap',
@@ -88,7 +83,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     validator: (v) => (v?.isEmpty ?? true) ? 'Nama wajib diisi' : null,
                   ),
                   const SizedBox(height: 16),
-
                   CustomTextField(
                     label: 'Email',
                     hint: 'contoh@email.com',
@@ -102,7 +96,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                   ),
                   const SizedBox(height: 16),
-
                   CustomTextField(
                     label: 'Password',
                     hint: 'Minimal 8 karakter',
@@ -117,7 +110,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ? 'Password minimal 8 karakter' : null,
                   ),
                   const SizedBox(height: 16),
-
                   CustomTextField(
                     label: 'Konfirmasi Password',
                     hint: 'Ulangi password',
@@ -128,22 +120,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ? 'Password tidak cocok' : null,
                   ),
                   const SizedBox(height: 28),
-
-                  // Widget reusable: CustomButton
                   CustomButton(
                     label: 'Daftar Sekarang',
                     onPressed: _register,
                     isLoading: isLoading,
                   ),
                   const SizedBox(height: 16),
-
-                  // Link ke Login
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Text('Sudah punya akun? '),
                     GestureDetector(
                       onTap: () => Navigator.pushReplacementNamed(context, AppRouter.login),
                       child: const Text('Masuk',
-                        style: TextStyle(color: Color(0xFF1565C0), fontWeight: FontWeight.bold)),
+                        style: TextStyle(color: Color(0xFFFF9800), fontWeight: FontWeight.bold)),
                     ),
                   ]),
                 ],

@@ -15,7 +15,6 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    // Fetch produk begitu halaman dibuka
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductProvider>().fetchProducts();
     });
@@ -134,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           Text(
                             'Rp ${p.price.toStringAsFixed(0)}',
                             style: const TextStyle(
-                              color: Color(0xFF1565C0),
+                              color: Color(0xFFFF9800),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -145,14 +144,14 @@ class _DashboardPageState extends State<DashboardPage> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.blue.shade50,
+                              color: Colors.orange.shade50,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               p.category,
                               style: const TextStyle(
                                 fontSize: 11,
-                                color: Color(0xFF1565C0),
+                                color: Color(0xFFFF9800),
                               ),
                             ),
                           ),
