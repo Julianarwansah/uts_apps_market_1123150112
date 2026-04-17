@@ -197,14 +197,15 @@ class AuthProvider extends ChangeNotifier {
         return false;
       }
 
-      final googleAuth = await googleUser.authentication;
-      final credential = GoogleAuthProvider.credential(
+      final googleAuth  = await googleUser.authentication;
+      final credential  = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken:     googleAuth.idToken,
       );
       final userCred = await _auth.signInWithCredential(credential);
       _firebaseUser  = userCred.user;
 
+      // Google login → email otomatis terverifikasi
       return await _verifyTokenToBackend();
     } catch (e) {
       _setError('Gagal login dengan Google: $e');
