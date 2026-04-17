@@ -113,7 +113,7 @@ class _ProductCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Stok: ${product.stock}',
+                  product.category,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 11),
                 ),
               ],
