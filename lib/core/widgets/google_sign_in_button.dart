@@ -24,12 +24,12 @@ class GoogleSignInButton extends StatelessWidget {
                 height: 20,
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
-            : Row(
+            : const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/google_logo.png', height: 22),
-                  const SizedBox(width: 12),
-                  const Text(
+                  _GoogleIcon(),
+                  SizedBox(width: 12),
+                  Text(
                     'Lanjutkan dengan Google',
                     style: TextStyle(
                       fontSize: 16,
@@ -39,6 +39,29 @@ class GoogleSignInButton extends StatelessWidget {
                   ),
                 ],
               ),
+      ),
+    );
+  }
+}
+
+class _GoogleIcon extends StatelessWidget {
+  const _GoogleIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 22,
+      height: 22,
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      child: const Text(
+        'G',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF4285F4),
+          height: 1.2,
+        ),
       ),
     );
   }
