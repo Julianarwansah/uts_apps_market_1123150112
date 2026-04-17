@@ -29,6 +29,9 @@ class ProductProvider extends ChangeNotifier {
     } on DioException catch (e) {
       _error  = e.response?.data['message'] ?? 'Gagal memuat produk';
       _status = ProductStatus.error;
+    } catch (e) {
+      _error  = 'Terjadi kesalahan data: $e';
+      _status = ProductStatus.error;
     }
 
     notifyListeners();

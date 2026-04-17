@@ -19,8 +19,12 @@ class ProductRepositoryImpl implements ProductRepository {
       },
     );
 
-    final List<dynamic> data = response.data['data'];
-    return data.map((e) => ProductModel.fromJson(e)).toList();
+    final dynamic rawData = response.data['data'];
+    if (rawData == null || rawData is! List) {
+      return [];
+    }
+    
+    return rawData.map((e) => ProductModel.fromJson(e)).toList();
   }
 
   @override

@@ -17,11 +17,12 @@ func main() {
 	config.InitDatabase()
 
 	products := []models.Product{
-		{Name: "Nasi Goreng Spesial", Price: 25000, Category: "Makanan", Stock: 50, Description: "Nasi goreng dengan telur dan ayam", ImageURL: "https://picsum.photos/400"},
-		{Name: "Sate Ayam 10 Tusuk", Price: 20000, Category: "Makanan", Stock: 100, Description: "Sate ayam dengan bumbu kacang", ImageURL: "https://picsum.photos/401"},
-		{Name: "Es Teh Manis", Price: 8000, Category: "Minuman", Stock: 200, Description: "Es teh manis segar", ImageURL: "https://picsum.photos/402"},
-		{Name: "Kopi Susu", Price: 15000, Category: "Minuman", Stock: 150, Description: "Kopi susu kekinian", ImageURL: "https://picsum.photos/403"},
-		{Name: "Ayam Bakar", Price: 30000, Category: "Makanan", Stock: 30, Description: "Ayam bakar dengan sambal", ImageURL: "https://picsum.photos/404"},
+		{Name: "Dalil", Price: 18000, Category: "Investigasi & Penjualan Lapangan", Stock: 100, Description: "Rokok Dalil - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/dalil/400"},
+		{Name: "Hmin", Price: 15000, Category: "Investigasi & Penjualan Lapangan", Stock: 150, Description: "Rokok Hmin - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/hmin/401"},
+		{Name: "Towin", Price: 17000, Category: "Investigasi & Penjualan Lapangan", Stock: 80, Description: "Rokok Towin - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/towin/402"},
+		{Name: "Classy", Price: 25000, Category: "Investigasi & Penjualan Lapangan", Stock: 200, Description: "Rokok Classy - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/classy/403"},
+		{Name: "Anoah", Price: 22000, Category: "Investigasi & Penjualan Lapangan", Stock: 60, Description: "Rokok Anoah - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/anoah/404"},
+		{Name: "Bonte", Price: 12000, Category: "Investigasi & Penjualan Lapangan", Stock: 300, Description: "Rokok Bonte - Temuan Investigasi", ImageURL: "https://picsum.photos/seed/bonte/405"},
 	}
 
 	for _, p := range products {

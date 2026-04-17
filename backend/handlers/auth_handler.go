@@ -74,7 +74,7 @@ func (h *AuthHandler) VerifyToken(c *gin.Context) {
 				"name":           user.Name,
 				"role":           user.Role,
 				"email_verified": user.EmailVerified,
-				"created_at":     user.CreatedAt.Format(time.RFC3339),
+				"created_at":     time.Unix(user.CreatedAt, 0).Format(time.RFC3339),
 			},
 		},
 	})

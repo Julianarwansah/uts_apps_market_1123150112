@@ -1,9 +1,9 @@
 package models
 
-import "gorm.io/gorm"
-
 type Product struct {
-	gorm.Model
+	ID          uint    `gorm:"primarykey" json:"id"`
+	CreatedAt   int64   `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt   int64   `gorm:"autoUpdateTime" json:"updated_at"`
 	Name        string  `gorm:"size:200;not null;index" json:"name"`
 	Description string  `gorm:"type:text"              json:"description"`
 	Price       float64 `gorm:"not null"               json:"price"`
