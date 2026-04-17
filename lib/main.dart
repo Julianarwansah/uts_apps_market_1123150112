@@ -11,15 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ProductProvider()),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,12 +19,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'UTS Apps Market',
-      theme: AppTheme.light,
-      initialRoute: AppRouter.splash,
-      routes: AppRouter.routes,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ],
+      child: MaterialApp(
+        title:                     'My App',
+        debugShowCheckedModeBanner: false,
+        theme:                     AppTheme.light,
+        initialRoute:              AppRouter.splash,
+        routes:                    AppRouter.routes,
+      ),
     );
   }
 }
