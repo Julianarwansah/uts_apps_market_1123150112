@@ -1,5 +1,7 @@
 class ApiConstants {
-  static const String baseUrl = 'http://192.168.110.28:8080/v1';
+  // Gunakan localhost untuk iOS Simulator, 10.0.2.2 untuk Android Emulator
+  // Atau gunakan IP local machine Anda (contoh: 192.168.1.xx) jika ke device fisik
+  static const String baseUrl = 'http://localhost:8080/v1';
  
   // Auth endpoints
   static const String verifyToken = '/auth/verify-token';
