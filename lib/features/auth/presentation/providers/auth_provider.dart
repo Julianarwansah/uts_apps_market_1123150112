@@ -171,12 +171,14 @@ class AuthProvider extends ChangeNotifier {
       );
       _firebaseUser = credential.user;
 
+      // Cek apakah email sudah diverifikasi
       if (!(_firebaseUser?.emailVerified ?? false)) {
         _status = AuthStatus.emailNotVerified;
         notifyListeners();
         return false;
       }
 
+      // Email terverifikasi → dapatkan token Firebase → kirim ke backend
       return await _verifyTokenToBackend();
     } on FirebaseAuthException catch (e) {
       _setError(_mapFirebaseError(e.code));
