@@ -43,7 +43,10 @@ class _DashboardPageState extends State<DashboardPage> {
             icon: const Icon(Icons.account_circle),
             onPressed: () => showDialog(
               context: context,
-              builder: (_) => const _AccountDialog(),
+              builder: (_) => ChangeNotifierProvider.value(
+                value: context.read<ThemeProvider>(),
+                child: const _AccountDialog(),
+              ),
             ),
           ),
           IconButton(

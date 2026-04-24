@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uts_apps_market_1123150112/core/router/app_router.dart';
 import 'package:uts_apps_market_1123150112/core/theme/app_theme.dart';
+import 'package:uts_apps_market_1123150112/core/theme/theme_provider.dart';
 import 'package:uts_apps_market_1123150112/features/auth/presentation/providers/auth_provider.dart';
 import 'package:uts_apps_market_1123150112/features/product/presentation/providers/product_provider.dart';
 import 'firebase_options.dart';
@@ -21,15 +22,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
-      child: MaterialApp(
-        title:                     'My App',
-        debugShowCheckedModeBanner: false,
-        theme:                     AppTheme.light,
-        initialRoute:              AppRouter.splash,
-        routes:                    AppRouter.routes,
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, _) => MaterialApp(
+          title:                     'My App',
+          debugShowCheckedModeBanner: false,
+          theme:                     AppTheme.light,
+          darkTheme:                 AppTheme.dark,
+          themeMode:                 themeProvider.themeMode,
+          initialRoute:              AppRouter.splash,
+          routes:                    AppRouter.routes,
+        ),
       ),
     );
   }
