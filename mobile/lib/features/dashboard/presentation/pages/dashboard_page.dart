@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uts_apps_market_1123150112/core/router/app_router.dart';
+import 'package:uts_apps_market_1123150112/core/theme/theme_provider.dart';
 import 'package:uts_apps_market_1123150112/features/auth/presentation/providers/auth_provider.dart';
 import 'package:uts_apps_market_1123150112/features/product/presentation/providers/product_provider.dart';
 
@@ -38,6 +39,13 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (_) => const _AccountDialog(),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
@@ -79,6 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
 
         ProductStatus.loaded => RefreshIndicator(
+
           onRefresh: () => product.fetchProducts(),
           child: GridView.builder(
             padding: const EdgeInsets.all(16),
@@ -165,6 +174,43 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       },
+    );
+  }
+}
+
+class _AccountDialog extends StatelessWidget {
+  const _AccountDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
+    final isDark = themeProvider.isDark;
+
+    return AlertDialog(
+      title: const Text('Akun'),
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                isDark ? Icons.dark_mode : Icons.light_mode,
+                size: 20,
+                color: isDark ? Colors.amber : Colors.grey.shade600,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                isDark ? 'Mode Gelap' : 'Mode Terang',
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+          Switch(
+            value: isDark,
+            onChanged: (_) => context.read<ThemeProvider>().toggle(),
+          ),
+        ],
+      ),
     );
   }
 }
