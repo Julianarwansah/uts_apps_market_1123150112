@@ -99,7 +99,12 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             itemCount: product.products.length,
             itemBuilder: (context, i) {
-              final p = product.products[i];
+              final p            = product.products[i];
+              final surface      = Theme.of(context).colorScheme.surface;
+              final onSurface    = Theme.of(context).colorScheme.onSurface;
+              final primary      = Theme.of(context).colorScheme.primary;
+              final hintColor    = Theme.of(context).hintColor;
+
               return Card(
                 elevation: 2,
                 shape: RoundedRectangleBorder(
@@ -119,8 +124,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         fit: BoxFit.cover,
                         errorBuilder: (_, _, _) => Container(
                           height: 120,
-                          color: Colors.grey.shade200,
-                          child: const Icon(Icons.image_not_supported, size: 40),
+                          color: surface,
+                          child: Icon(Icons.image_not_supported, size: 40, color: hintColor),
                         ),
                       ),
                     ),
@@ -131,9 +136,10 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           Text(
                             p.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
+                              color: onSurface,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -141,8 +147,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           const SizedBox(height: 4),
                           Text(
                             'Rp ${p.price.toStringAsFixed(0)}',
-                            style: const TextStyle(
-                              color: Color(0xFFFF9800),
+                            style: TextStyle(
+                              color: primary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -153,14 +159,14 @@ class _DashboardPageState extends State<DashboardPage> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.orange.shade50,
+                              color: primary.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               p.category,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 11,
-                                color: Color(0xFFFF9800),
+                                color: primary,
                               ),
                             ),
                           ),
